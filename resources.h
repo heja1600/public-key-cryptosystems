@@ -4,6 +4,9 @@
 #include <bitset>
 #include <iostream>
 #include "bitstream.h"
+#include "prime-factor.h"
+
+
 using u_long = unsigned long long int;
 
 class resources {
@@ -27,6 +30,15 @@ public:
         return k;   
     }
 
+    static u_long get_relative_prime(const u_long p) {
+        std::vector<u_long> primes = prime_factor::start(p - 1);
+        for(u_long a = 2; a < p; a++) {
+            for(auto prime: primes) {
+                u_long exp = resources::high_exponents(a, prime, p);
+                if(resources::gcd(exp - 1, p) != p) return a;
+            }        
+        }
+    }
 
     static u_long generate_e(const u_long n) {
         return 17;
