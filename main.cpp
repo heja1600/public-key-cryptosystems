@@ -7,6 +7,7 @@
 #include "resources.h"
 
 int main() {
-  resources::get_relative_prime(23);
+  ELGAMAL_CRYPT eg(23);
+  eg.decrypt(eg.encrypt(10));
 }
 
